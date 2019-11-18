@@ -1,9 +1,11 @@
 package github.com.leonardowiest.fornecedor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import github.com.leonardowiest.fornecedor.domain.InfoFornecedor;
 import github.com.leonardowiest.fornecedor.service.InfoService;
 
 @RestController
@@ -14,9 +16,9 @@ public class InfoController {
     private InfoService infoService;
 
     @RequestMapping("/{uf}")
-    public void getInfoPorUF(String uf) {
+    public InfoFornecedor getInfoPorUF(@PathVariable String uf) {
 
-        infoService.getInfoPorUF(uf);
+        return infoService.getInfoPorUF(uf);
     }
 
 }

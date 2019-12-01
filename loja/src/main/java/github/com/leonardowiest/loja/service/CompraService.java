@@ -1,5 +1,6 @@
 package github.com.leonardowiest.loja.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,14 @@ import github.com.leonardowiest.loja.dto.InfoFornecedorDTO;
 @Service
 public class CompraService {
 
+    @Autowired
+    private RestTemplate client;
+
     public void processarCompra(CompraDTO compraDTO) {
 
-        ResponseEntity<InfoFornecedorDTO> fornecedorDTO = new RestTemplate().exchange("http://localhost:8081/info/" + compraDTO.getEndereco().getUf(),
-                HttpMethod.GET, null, InfoFornecedorDTO.class);
-        
+        ResponseEntity<InfoFornecedorDTO> fornecedorDTO = client.exchange("http://fornecedor/info/" + compraDTO.getEndereco().getUf(), HttpMethod.GET,
+                null, InfoFornecedorDTO.class);
+
         System.out.println(fornecedorDTO.getBody().getEndereco());
     }
 

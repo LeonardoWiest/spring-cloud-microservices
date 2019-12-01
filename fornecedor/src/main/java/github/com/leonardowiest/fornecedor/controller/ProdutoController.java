@@ -17,8 +17,8 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @RequestMapping("/{estado}")
-    public List<Produto> getProdutosPorEstado(@PathVariable("estado") String estado) {
-        return produtoService.getProdutosPorUf(estado);
+    @RequestMapping("/{uf}")
+    public List<Produto> getProdutosPorEstado(@PathVariable("uf") String uf) {
+        return produtoService.getProdutosPorUf(uf);
     }
 }

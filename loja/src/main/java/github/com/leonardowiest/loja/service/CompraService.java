@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import github.com.leonardowiest.loja.client.FornecedorClient;
+import github.com.leonardowiest.loja.domain.Compra;
 import github.com.leonardowiest.loja.dto.CompraDTO;
 import github.com.leonardowiest.loja.dto.InfoFornecedorDTO;
+import github.com.leonardowiest.loja.dto.InfoPedidoDTO;
 
 @Service
 public class CompraService {
@@ -13,11 +15,18 @@ public class CompraService {
     @Autowired
     private FornecedorClient fornecedorClient;
 
-    public void processarCompra(CompraDTO compraDTO) {
+    public Compra processarCompra(CompraDTO compraDTO) {
 
         InfoFornecedorDTO fornecedorDTO = fornecedorClient.getInfoPorUF(compraDTO.getEndereco().getUf());
 
-        System.out.println(fornecedorDTO.getEndereco());
+        InfoPedidoDTO pedido = fornecedorClient.realizaPedido(compraDTO.getItens());
+
+        Compra compra = new Compra();
+        compra.setPedidoID(pedido.getId());
+        compra.setTempoDePreparo(pedido.getTempoDePreparo());
+        compra.setEnderecoDestino(compraDTO.getEndereco().toString());
+
+        return compra;
     }
 
     /*@Autowired

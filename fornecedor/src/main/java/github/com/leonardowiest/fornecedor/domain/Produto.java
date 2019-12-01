@@ -16,7 +16,7 @@ public class Produto {
 
     private String nome;
 
-    private String estado;
+    private String uf;
 
     private String descricao;
 
@@ -38,6 +38,14 @@ public class Produto {
         this.nome = nome;
     }
 
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -52,14 +60,6 @@ public class Produto {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
 }

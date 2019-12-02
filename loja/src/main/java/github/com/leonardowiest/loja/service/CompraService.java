@@ -3,6 +3,8 @@ package github.com.leonardowiest.loja.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import github.com.leonardowiest.loja.client.FornecedorClient;
 import github.com.leonardowiest.loja.domain.Compra;
 import github.com.leonardowiest.loja.dto.CompraDTO;
@@ -15,6 +17,7 @@ public class CompraService {
     @Autowired
     private FornecedorClient fornecedorClient;
 
+    @HystrixCommand
     public Compra processarCompra(CompraDTO compraDTO) {
 
         InfoFornecedorDTO fornecedorDTO = fornecedorClient.getInfoPorUF(compraDTO.getEndereco().getUf());
